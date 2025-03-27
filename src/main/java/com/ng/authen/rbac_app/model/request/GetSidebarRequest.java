@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * The type Get sidebar request.
+ */
 @SuperBuilder(toBuilder = true)
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)

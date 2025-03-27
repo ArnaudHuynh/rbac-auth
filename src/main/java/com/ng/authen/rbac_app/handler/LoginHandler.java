@@ -11,12 +11,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Login handler.
+ */
 @Component
 public class LoginHandler implements HandlerWrapper<LoginRequest, BaseResponse<LoginResponse>> {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    /**
+     * Instantiates a new Login handler.
+     *
+     * @param authenticationManager the authentication manager
+     * @param jwtUtil               the jwt util
+     */
     public LoginHandler(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;

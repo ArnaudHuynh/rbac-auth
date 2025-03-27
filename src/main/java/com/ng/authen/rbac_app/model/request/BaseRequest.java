@@ -8,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
+/**
+ * The type Base request.
+ */
 @SuperBuilder(toBuilder = true)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

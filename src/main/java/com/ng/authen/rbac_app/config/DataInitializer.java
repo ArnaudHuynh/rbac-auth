@@ -15,9 +15,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 
+/**
+ * The type Data initializer.
+ */
 @Configuration
 public class DataInitializer {
 
+    /**
+     * Init data command line runner.
+     *
+     * @param userRepository       the user repository
+     * @param roleRepository       the role repository
+     * @param permissionRepository the permission repository
+     * @param passwordEncoder      the password encoder
+     * @return the command line runner
+     */
     @Bean
     public CommandLineRunner initData(UserRepository userRepository,
                                       RoleRepository roleRepository,
@@ -68,6 +80,11 @@ public class DataInitializer {
         };
     }
 
+    /**
+     * Password encoder password encoder.
+     *
+     * @return the password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         // Configure Argon2 with custom parameters

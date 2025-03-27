@@ -1,8 +1,6 @@
 package com.ng.authen.rbac_app.config;
 
 import com.ng.authen.rbac_app.filter.JwtAuthenticationFilter;
-import com.ng.authen.rbac_app.filter.LoggingFilter;
-import com.ng.authen.rbac_app.filter.RequestIdFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,29 +16,39 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.util.Arrays;
 
+/**
+ * The type Security config.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     private final Environment environment;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final RequestIdFilter requestIdFilter;
-    private final LoggingFilter loggingFilter;
 
     // Inject the spring.h2.console.enabled property
     @Value("${spring.h2.console.enabled:false}")
     private boolean h2ConsoleEnabled;
 
+    /**
+     * Instantiates a new Security config.
+     *
+     * @param environment             the environment
+     * @param jwtAuthenticationFilter the jwt authentication filter
+     */
     public SecurityConfig(Environment environment,
-                          JwtAuthenticationFilter jwtAuthenticationFilter,
-                          RequestIdFilter requestIdFilter,
-                          LoggingFilter loggingFilter) {
+                          JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.environment = environment;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.requestIdFilter = requestIdFilter;
-        this.loggingFilter = loggingFilter;
     }
 
+    /**
+     * Security filter chain security filter chain.
+     *
+     * @param http the http
+     * @return the security filter chain
+     * @throws Exception the exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Check if the 'dev' profile is active
@@ -60,8 +68,15 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // Configure authorization rules
                 .authorizeHttpRequests(auth -> {
-                    if (isDevProfile && h2ConsoleEnabled) {
-                        auth.requestMatchers("/h2-console/**").permitAll();
+                    if (isDevProfile) {
+                        // Allow access to Swagger UI and API docs in dev profile
+                        auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll();
+                        if (h2ConsoleEnabled) {
+                            auth.requestMatchers("/h2-console/**").permitAll();
+                        }
+                    } else {
+                        // In non-dev profiles, restrict Swagger UI to ADMIN users
+                        auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN");
                     }
                     // Public endpoints
                     auth.requestMatchers("/api/auth/**").permitAll();
@@ -81,6 +96,13 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Authentication manager authentication manager.
+     *
+     * @param authenticationConfiguration the authentication configuration
+     * @return the authentication manager
+     * @throws Exception the exception
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

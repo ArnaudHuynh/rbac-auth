@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+/**
+ * The type Register handler.
+ */
 @Component
 public class RegisterHandler implements HandlerWrapper<RegisterRequest, BaseResponse<String>> {
 
@@ -21,6 +24,13 @@ public class RegisterHandler implements HandlerWrapper<RegisterRequest, BaseResp
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Instantiates a new Register handler.
+     *
+     * @param userRepository  the user repository
+     * @param roleRepository  the role repository
+     * @param passwordEncoder the password encoder
+     */
     public RegisterHandler(UserRepository userRepository,
                            RoleRepository roleRepository,
                            PasswordEncoder passwordEncoder) {

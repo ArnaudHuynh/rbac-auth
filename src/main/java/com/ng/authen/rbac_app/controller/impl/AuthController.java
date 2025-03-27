@@ -17,6 +17,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The type Auth controller.
+ */
 @RestController
 public class AuthController implements IAuthController {
 
@@ -24,6 +27,13 @@ public class AuthController implements IAuthController {
     private final LoginHandler loginHandler;
     private final TokenBlacklistService tokenBlacklistService;
 
+    /**
+     * Instantiates a new Auth controller.
+     *
+     * @param registerHandler       the register handler
+     * @param loginHandler          the login handler
+     * @param tokenBlacklistService the token blacklist service
+     */
     public AuthController(RegisterHandler registerHandler,
                           LoginHandler loginHandler,
                           TokenBlacklistService tokenBlacklistService) {

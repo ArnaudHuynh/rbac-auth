@@ -8,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Custom error response.
+ */
 @SuperBuilder(toBuilder = true)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

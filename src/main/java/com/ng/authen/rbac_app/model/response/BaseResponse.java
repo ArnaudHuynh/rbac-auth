@@ -4,6 +4,11 @@ import lombok.*;
 
 import java.util.List;
 
+/**
+ * The type Base response.
+ *
+ * @param <T> the type parameter
+ */
 @Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

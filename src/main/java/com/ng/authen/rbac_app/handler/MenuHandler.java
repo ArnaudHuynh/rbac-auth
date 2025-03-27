@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Menu handler.
+ */
 @Component
 public class MenuHandler implements HandlerWrapper<GetSidebarRequest, BaseResponse<List<SidebarItem>>> {
 

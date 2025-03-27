@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * The type Register request.
+ */
 @SuperBuilder(toBuilder = true)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

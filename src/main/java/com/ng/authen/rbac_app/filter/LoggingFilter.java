@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
+/**
+ * The type Logging filter.
+ */
 @Component
 public class LoggingFilter extends OncePerRequestFilter implements Ordered {
 

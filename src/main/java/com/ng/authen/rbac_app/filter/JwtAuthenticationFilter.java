@@ -17,6 +17,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * The type Jwt authentication filter.
+ */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter implements Ordered {
 
@@ -25,6 +28,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter implements Ord
     private final TokenBlacklistService tokenBlacklistService;
     private static final int FILTER_ORDER = -100;
 
+    /**
+     * Instantiates a new Jwt authentication filter.
+     *
+     * @param jwtUtil               the jwt util
+     * @param userDetailsService    the user details service
+     * @param tokenBlacklistService the token blacklist service
+     */
     public JwtAuthenticationFilter(JwtUtil jwtUtil,
                                    CustomUserDetailsService userDetailsService,
                                    TokenBlacklistService tokenBlacklistService) {

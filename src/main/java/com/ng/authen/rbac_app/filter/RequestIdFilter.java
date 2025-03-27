@@ -12,9 +12,15 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.UUID;
 
+/**
+ * The type Request id filter.
+ */
 @Component
 public class RequestIdFilter extends OncePerRequestFilter implements Ordered {
 
+    /**
+     * The constant REQUEST_ID_HEADER.
+     */
     public static final String REQUEST_ID_HEADER = "X-Request-ID";
     private static final String MDC_REQUEST_ID_KEY = "requestId";
     private static final int FILTER_ORDER = -200;

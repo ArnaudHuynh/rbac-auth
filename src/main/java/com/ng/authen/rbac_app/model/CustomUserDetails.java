@@ -8,10 +8,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/**
+ * The type Custom user details.
+ */
 public class CustomUserDetails implements UserDetails {
 
     private final UserEntity userEntity;
 
+    /**
+     * Instantiates a new Custom user details.
+     *
+     * @param UserEntity the user entity
+     */
     public CustomUserDetails(UserEntity UserEntity) {
         this.userEntity = UserEntity;
     }
@@ -53,6 +61,11 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public UserEntity getUser() {
         return userEntity;
     }

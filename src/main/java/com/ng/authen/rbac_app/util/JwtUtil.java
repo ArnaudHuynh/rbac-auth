@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * The type Jwt util.
+ */
 @Component
 public class JwtUtil {
 
@@ -21,7 +24,13 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    // Generate a JWT token
+    /**
+     * Generate token string.
+     *
+     * @param username the username
+     * @return the string
+     */
+// Generate a JWT token
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, username);
@@ -37,23 +46,50 @@ public class JwtUtil {
                 .compact();
     }
 
-    // Validate the token
+    /**
+     * Validate token boolean.
+     *
+     * @param token    the token
+     * @param username the username
+     * @return the boolean
+     */
+// Validate the token
     public Boolean validateToken(String token, String username) {
         final String extractedUsername = extractUsername(token);
         return (extractedUsername.equals(username) && !isTokenExpired(token));
     }
 
-    // Extract username from token
+    /**
+     * Extract username string.
+     *
+     * @param token the token
+     * @return the string
+     */
+// Extract username from token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Extract expiration date from token
+    /**
+     * Extract expiration date.
+     *
+     * @param token the token
+     * @return the date
+     */
+// Extract expiration date from token
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    // Generic method to extract claims
+    /**
+     * Extract claim t.
+     *
+     * @param <T>            the type parameter
+     * @param token          the token
+     * @param claimsResolver the claims resolver
+     * @return the t
+     */
+// Generic method to extract claims
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);

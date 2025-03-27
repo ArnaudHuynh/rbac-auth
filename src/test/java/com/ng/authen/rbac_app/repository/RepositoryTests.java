@@ -9,8 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * The type Repository tests.
+ */
 @SpringBootTest
 @Transactional
 public class RepositoryTests {
@@ -21,6 +25,9 @@ public class RepositoryTests {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Test find by username.
+     */
     @Test
     public void testFindByUsername() {
         Optional<UserEntity> user = userRepository.findByUsername("admin");
@@ -28,6 +35,9 @@ public class RepositoryTests {
         assertTrue(user.get().getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN")));
     }
 
+    /**
+     * Test password encoding and matching.
+     */
     @Test
     public void testPasswordEncodingAndMatching() {
         Optional<UserEntity> user = userRepository.findByUsername("admin");

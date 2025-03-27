@@ -6,6 +6,9 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type User entity.
+ */
 @Entity
 @Table(name = "AD_USER")
 @Getter

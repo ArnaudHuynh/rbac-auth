@@ -10,11 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * The type Menu controller.
+ */
 @RestController
 public class MenuController implements IMenuController {
 
     private final MenuHandler menuHandler;
 
+    /**
+     * Instantiates a new Menu controller.
+     *
+     * @param menuHandler the menu handler
+     */
     public MenuController(MenuHandler menuHandler) {
         this.menuHandler = menuHandler;
     }
