@@ -31,6 +31,7 @@ dependencies {
 
 	// H2 Database for in-memory testing
 	runtimeOnly("com.h2database:h2")
+	implementation 'org.postgresql:postgresql:42.7.4'
 
 	// Lombok to reduce boilerplate code
 	implementation("org.projectlombok:lombok")
