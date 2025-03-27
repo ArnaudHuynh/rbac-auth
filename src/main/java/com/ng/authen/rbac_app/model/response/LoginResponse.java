@@ -1,4 +1,4 @@
-package com.ng.authen.rbac_app.model.request;
+package com.ng.authen.rbac_app.model.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class LoginRequest extends BaseRequest {
-    private String username;
-    private String password;
+public class LoginResponse {
+    private String token;
 }

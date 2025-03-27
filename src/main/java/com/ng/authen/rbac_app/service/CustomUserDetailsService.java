@@ -2,6 +2,7 @@ package com.ng.authen.rbac_app.service;
 
 
 import com.ng.authen.rbac_app.entity.UserEntity;
+import com.ng.authen.rbac_app.exception.ResourceNotFoundException;
 import com.ng.authen.rbac_app.model.CustomUserDetails;
 import com.ng.authen.rbac_app.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 userRepository.findByUsername(username)
                         .orElseThrow(
                                 () ->
-                                        new UsernameNotFoundException(
+                                        new ResourceNotFoundException(
                                                 "User not found with username: " + username
                                         )
                         );

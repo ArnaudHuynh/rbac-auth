@@ -1,7 +1,8 @@
 package com.ng.authen.rbac_app.config;
 
-import com.ng.authen.rbac_app.service.CustomUserDetailsService;
-import com.ng.authen.rbac_app.util.JwtUtil;
+import com.ng.authen.rbac_app.filter.JwtAuthenticationFilter;
+import com.ng.authen.rbac_app.filter.LoggingFilter;
+import com.ng.authen.rbac_app.filter.RequestIdFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,15 +24,21 @@ public class SecurityConfig {
 
     private final Environment environment;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final RequestIdFilter requestIdFilter;
+    private final LoggingFilter loggingFilter;
 
     // Inject the spring.h2.console.enabled property
     @Value("${spring.h2.console.enabled:false}")
     private boolean h2ConsoleEnabled;
 
     public SecurityConfig(Environment environment,
-                          JwtAuthenticationFilter jwtAuthenticationFilter) {
+                          JwtAuthenticationFilter jwtAuthenticationFilter,
+                          RequestIdFilter requestIdFilter,
+                          LoggingFilter loggingFilter) {
         this.environment = environment;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.requestIdFilter = requestIdFilter;
+        this.loggingFilter = loggingFilter;
     }
 
     @Bean
@@ -45,7 +52,7 @@ public class SecurityConfig {
 //                        // Disable CSRF for H2 console only in dev environment
 //                        csrf.ignoringRequestMatchers("/h2-console/**");
 //                    } else {
-                        csrf.disable();
+                    csrf.disable();
 //                    }
                 })
                 // Configure session management (stateless for JWT)
